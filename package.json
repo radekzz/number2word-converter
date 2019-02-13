@@ -1,0 +1,10 @@
+{
+  "name": "number-to-word-converter",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Radek Mezuláník",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
