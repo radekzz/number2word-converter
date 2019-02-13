@@ -7,7 +7,8 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "test": "mocha tests/api.test.js"
   },
   "dependencies": {
     "express": "^4.16.3"
@@ -20,7 +21,10 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.1.0",
+    "expect": "^22.4.3",
+    "mocha": "^5.2.0",
     "morgan": "^1.9.0",
+    "supertest": "^3.1.0",
     "standard": "^11.0.1"
   }
 }
