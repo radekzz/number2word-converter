@@ -11,7 +11,7 @@ class Converter extends Component {
         this.state = {
             messages: [],
             currentMessage: '',
-            currentInput: {
+            inputValues: {
                 numbers: '',
                 letters: ''
             },
@@ -19,7 +19,7 @@ class Converter extends Component {
             wordChosen: null
         }
 
-        this.updateCurrentInput = this.updateCurrentInput.bind(this)
+        this.updateInputValues = this.updateInputValues.bind(this)
         this.addWord = this.addWord.bind(this);
         this.deleteWord = this.deleteWord.bind(this);
         this.submitMessage = this.submitMessage.bind(this);
@@ -36,8 +36,8 @@ class Converter extends Component {
         }
     }
 
-    updateCurrentInput(newValues) {
-        this.setState({currentInput: newValues})
+    updateInputValues(newValues) {
+        this.setState({inputValues: newValues})
 
         newValues.numbers ?
             this.fetchSuggestions(newValues.numbers) :
@@ -49,7 +49,7 @@ class Converter extends Component {
             currentMessage: prevState.currentMessage ? 
                 prevState.currentMessage + word + ' ' :
                 word + ' ',
-            currentInput: {
+            inputValues: {
                 numbers: '',
                 letters: ''
             },
@@ -89,12 +89,12 @@ class Converter extends Component {
         const messages = this.state.messages;
         messages.push({
             position: 'right',
-            text: (this.state.currentMessage + this.state.currentInput.letters).trim()
+            text: (this.state.currentMessage + this.state.inputValues.letters).trim()
         })
         this.setState({
             messages,
             currentMessage: '',
-            currentInput: { numbers: '', letters: '' }
+            inputValues: { numbers: '', letters: '' }
         })
     }
 
@@ -104,7 +104,7 @@ class Converter extends Component {
                 <DisplayMessages messages={this.state.messages} />
                 <DisplayInput 
                     currentMessage={this.state.currentMessage}
-                    currentInput={this.state.currentInput}
+                    inputValues={this.state.inputValues}
                     submitMessage={this.submitMessage} />
                 <Suggestions 
                     suggestions={this.state.suggestions}
@@ -112,11 +112,28 @@ class Converter extends Component {
                 <Keyboard 
                     addWord={this.addWord}
                     deleteWord={this.deleteWord}
-                    currentInputValues={this.state.currentInput}
-                    updateCurrentInput={this.updateCurrentInput} />
+                    inputValues={this.state.inputValues}
+                    updateInputValues={this.updateInputValues} />
             </div>
         );
     }
 }
 
 export default Converter;
+
+// test
+
+// it should render coponents
+//
+
+// updateCurrentInput, if the newvalues.numbers are currently empty,
+// empty the suggestion, otherwise trigger fetch with new values
+
+// addWord, inserting space logic, emptying suggestions and currentinput
+
+// deleteword, delete the word only if there is something to delete - current message
+// is not empty
+// deleteWord, delete an empty space if there is any in the the current mess
+// otherwise delete the last word of the current message
+
+// submitMessage, emty currentmessage and current input

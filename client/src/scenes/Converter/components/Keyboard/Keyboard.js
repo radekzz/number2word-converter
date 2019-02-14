@@ -19,24 +19,11 @@ const t9 = [
 class Keyboard extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            currentInput: {
-                numbers: this.props.currentInputValues.numbers,
-                letters: this.props.currentInputValues.letters
-            }
-        }
-
         this.handleEraseClick = this.handleEraseClick.bind(this);
         this.handleNumberClick = this.handleNumberClick.bind(this);
         this.handleSpaceClick = this.handleSpaceClick.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.handleKeydown = this.handleKeydown.bind(this);
-    }
-
-    static getDerivedStateFromProps(nextProps) {
-        return {
-          currentInput: nextProps.currentInputValues
-        };
     }
 
     componentDidMount() {
@@ -49,25 +36,25 @@ class Keyboard extends Component {
 
     handleEraseClick() {
         const updatedInputValues = {
-            numbers: this.state.currentInput.numbers.slice(0, -1),
-            letters: this.state.currentInput.letters.slice(0, -1)
+            numbers: this.props.inputValues.numbers.slice(0, -1),
+            letters: this.props.inputValues.letters.slice(0, -1)
         }
-        this.state.currentInput.letters ?
-            this.props.updateCurrentInput(updatedInputValues) :
+        this.props.inputValues.letters ?
+            this.props.updateInputValues(updatedInputValues) :
             this.props.deleteWord()
     }
 
     handleNumberClick(newNumber, newLetter) {
         const updatedInputValues = {
-            numbers: this.state.currentInput.numbers + newNumber,
-            letters: this.state.currentInput.letters + newLetter
+            numbers: this.props.inputValues.numbers + newNumber,
+            letters: this.props.inputValues.letters + newLetter
         }
-        this.props.updateCurrentInput(updatedInputValues)
+        this.props.updateInputValues(updatedInputValues)
     }
 
     handleSpaceClick() {
-        this.state.currentInput.letters ?
-            this.props.addWord(this.state.currentInput.letters) :
+        this.props.inputValues.letters ?
+            this.props.addWord(this.props.inputValues.letters) :
             this.props.addWord('')
     }
 

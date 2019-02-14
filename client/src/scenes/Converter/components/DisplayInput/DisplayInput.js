@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
 class DisplayInput extends Component {
-
     render() {
         return (
             <div>
-                {this.props.currentInput.numbers}
+                {this.props.inputValues.numbers}
                 <br />
-                {this.props.currentInput.letters}
+                {this.props.inputValues.letters}
                 <br />
                 Message: 
                 {this.props.currentMessage} 
