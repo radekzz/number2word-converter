@@ -114,7 +114,7 @@ class Keyboard extends Component {
                             key={button.key}
                             buttonKey={button.key}
                             letters={button.letters}
-                            onClick={this.handleButtonClick}
+                            onKeyboardClick={this.handleButtonClick}
                         />
                     )
                 })}

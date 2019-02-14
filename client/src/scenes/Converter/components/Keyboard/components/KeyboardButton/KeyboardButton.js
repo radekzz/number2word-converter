@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 
 class KeyboardButton extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(props) {
-        this.props.onClick(props)
-    }
-
     render() {
         return (
-            <button onClick={(e) => this.handleClick(this.props.buttonKey)}>
+            <button onClick={(e) => this.props.onKeyboardClick(this.props.buttonKey)}>
                 <span>{this.props.buttonKey}</span>
                 <br />
                 <span>
