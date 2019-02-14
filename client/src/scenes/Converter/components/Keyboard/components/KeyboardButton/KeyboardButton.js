@@ -13,8 +13,8 @@ class KeyboardButton extends Component {
 
     render() {
         return (
-            <button onClick={(e) => this.handleClick(this.props)}>
-                <span>{this.props.number}</span>
+            <button onClick={(e) => this.handleClick(this.props.buttonKey)}>
+                <span>{this.props.buttonKey}</span>
                 <br />
                 <span>
                     {this.props.letters.map((l,i) => <span key={i}>{l}</span>)}

@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import KeyboardButton from './components/KeyboardButton/KeyboardButton';
 
 const t9 = [
-    { number: '1', letters: [''] },
-    { number: '2', letters: ['a', 'b', 'c'] },
-    { number: '3', letters: ['d', 'e', 'f'] },
-    { number: '4', letters: ['g', 'h', 'i'] },
-    { number: '5', letters: ['j', 'k', 'l'] },
-    { number: '6', letters: ['m', 'n', 'o'] },
-    { number: '7', letters: ['p', 'q', 'r', 's'] },
-    { number: '8', letters: ['t', 'u', 'v'] },
-    { number: '9', letters: ['w', 'x', 'y', 'z'] }, 
-    { number: '|', letters: [''] }, // uppercase
-    { number: '0', letters: ['_'] }, // space
-    { number: 'X', letters: [''], } // delete
+    { key: '1', letters: [''] },
+    { key: '2', letters: ['a', 'b', 'c'] },
+    { key: '3', letters: ['d', 'e', 'f'] },
+    { key: '4', letters: ['g', 'h', 'i'] },
+    { key: '5', letters: ['j', 'k', 'l'] },
+    { key: '6', letters: ['m', 'n', 'o'] },
+    { key: '7', letters: ['p', 'q', 'r', 's'] },
+    { key: '8', letters: ['t', 'u', 'v'] },
+    { key: '9', letters: ['w', 'x', 'y', 'z'] }, 
+    { key: 'Shift', letters: [''] }, // uppercase
+    { key: '0', letters: ['_'] }, // space
+    { key: 'Backspace', letters: [''], } // delete
 ]
 
 class Keyboard extends Component {
@@ -30,12 +30,21 @@ class Keyboard extends Component {
         this.handleNumberClick = this.handleNumberClick.bind(this);
         this.handleSpaceClick = this.handleSpaceClick.bind(this);
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleKeydown = this.handleKeydown.bind(this);
     }
 
     static getDerivedStateFromProps(nextProps) {
         return {
           currentInput: nextProps.currentInputValues
         };
+    }
+
+    componentDidMount() {
+        document.addEventListener("keydown", this.handleKeydown);
+    }
+    
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handleKeydown);
     }
 
     handleEraseClick() {
@@ -62,13 +71,17 @@ class Keyboard extends Component {
             this.props.addWord('')
     }
 
-    handleButtonClick(buttonProps) {
-        switch (buttonProps.number) {
-            case '|':
+    handleKeydown(event) {       
+        this.handleButtonClick(event.key)
+    }
+
+    handleButtonClick(buttonKey) {
+        switch (buttonKey) {
+            case 'Shift':
                 // TODO: implement uppercasing
                 console.log('uppercase it');
                 break;
-            case 'X':
+            case 'Backspace':
                 this.handleEraseClick();
                 break;   
             case '0':
@@ -77,20 +90,30 @@ class Keyboard extends Component {
             case '1':
                 console.log('clicking number 1 does nothing at version 1.0.0, sorry');
                 break;
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                this.handleNumberClick(buttonKey, t9[buttonKey - 1].letters[0]);
+                break;
             default:
-                this.handleNumberClick(buttonProps.number, buttonProps.letters[0])
+                return;
         }
     }
 
     render() {
         return (
             <div>
-                {t9.map(item => {
+                {t9.map(button => {
                     return (
                         <KeyboardButton 
-                            key={item.number}
-                            number={item.number}
-                            letters={item.letters}
+                            key={button.key}
+                            buttonKey={button.key}
+                            letters={button.letters}
                             onClick={this.handleButtonClick}
                         />
                     )

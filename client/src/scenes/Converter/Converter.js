@@ -3,6 +3,7 @@ import DisplayMessages from './components/DisplayMessages/DisplayMessages';
 import DisplayInput from './components/DisplayInput/DisplayInput';
 import Suggestions from './components/Suggestions/Suggestions';
 import Keyboard from './components/Keyboard/Keyboard';
+import apiService from '../../services/api';
 
 class Converter extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class Converter extends Component {
                 numbers: '',
                 letters: ''
             },
-            suggestions: ['hello', 'world'],
+            suggestions: [],
             wordChosen: null
         }
 
@@ -24,8 +25,23 @@ class Converter extends Component {
         this.submitMessage = this.submitMessage.bind(this);
     }
 
+    async fetchSuggestions(numbers) {
+        try {
+            const response = await apiService.fetchFilteredT9conversions({numericString: numbers});
+            const body = await response.json();
+            if (response.status !== 200) throw Error(body.message);
+            this.setState({ suggestions: body.words })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     updateCurrentInput(newValues) {
         this.setState({currentInput: newValues})
+
+        newValues.numbers ?
+            this.fetchSuggestions(newValues.numbers) :
+            this.setState({suggestions: []})
     }
 
     addWord(word) {
