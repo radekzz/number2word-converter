@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import KeyboardButton from './components/KeyboardButton/KeyboardButton';
+import './Keyboard.css';
 
 const t9 = [
-    { key: '1', letters: [''] },
+    { key: '1', letters: ['\u00a0'] },
     { key: '2', letters: ['a', 'b', 'c'] },
     { key: '3', letters: ['d', 'e', 'f'] },
     { key: '4', letters: ['g', 'h', 'i'] },
@@ -93,7 +94,7 @@ class Keyboard extends Component {
 
     render() {
         return (
-            <div>
+            <div className="keyboard">
                 {t9.map(button => {
                     return (
                         <KeyboardButton 

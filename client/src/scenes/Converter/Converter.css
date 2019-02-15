@@ -1,0 +1,15 @@
+.converter {
+    width: 100%;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 500px) {
+    .converter {
+        max-width: 370px;
+        min-height: 755px;
+        padding: 97px 27px;
+        background: url('/frame.png') center / 400px auto no-repeat;
+    }
+}

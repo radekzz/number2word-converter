@@ -4,6 +4,7 @@ import DisplayInput from './components/DisplayInput/DisplayInput';
 import Suggestions from './components/Suggestions/Suggestions';
 import Keyboard from './components/Keyboard/Keyboard';
 import apiService from '../../services/api';
+import './Converter.css';
 
 class Converter extends Component {
     constructor(props) {
@@ -15,8 +16,7 @@ class Converter extends Component {
                 numbers: '',
                 letters: ''
             },
-            suggestions: [],
-            wordChosen: null
+            suggestions: []
         }
 
         this.updateInputValues = this.updateInputValues.bind(this)
@@ -101,7 +101,8 @@ class Converter extends Component {
 
     render() {
         return (
-            <div>
+            <section className="converter">
+                <div>header</div>
                 <DisplayMessages messages={this.state.messages} />
                 <DisplayInput 
                     currentMessage={this.state.currentMessage}
@@ -115,7 +116,7 @@ class Converter extends Component {
                     addWord={this.addWord}
                     deleteWord={this.deleteWord}
                     updateInputValues={this.updateInputValues} />
-            </div>
+            </section>
         );
     }
 }

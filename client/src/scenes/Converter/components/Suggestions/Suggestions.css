@@ -1,0 +1,48 @@
+.suggestions {
+    position: relative;
+}
+
+.suggestions-list {
+    min-height: 38px;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #BBC2C9;
+    color: #fff;
+}
+
+.suggestions-list > li {
+    flex: 1 0 auto;
+    padding: 10px 2px;
+    text-align: center;
+}
+
+.suggestions-list > li + li {
+    border-left: 1px solid rgba(255,255,255,.3)
+}
+
+.suggestions-control {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 25px;
+    border: 0;
+    background: url('/right-arrow.png') center / auto no-repeat;
+}
+
+.suggestions-control > span {
+    position: absolute !important;
+    height: 1px; width: 1px; 
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);  
+}
+
+.suggestions-control--prev {
+    left: 0;
+    background: url('/left-arrow.png') center / auto no-repeat;
+}
+
+.suggestions-control--next {
+    right: 0;
+}

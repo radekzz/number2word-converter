@@ -1,7 +1,12 @@
 .App {
-  text-align: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: top center;
 }
 
-div {
-    border: 1px solid grey
+@media (min-width: 500px) {
+    .App {
+        align-items: center;
+    }
 }

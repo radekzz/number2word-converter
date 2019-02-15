@@ -1,0 +1,26 @@
+.keyboardButton {
+    width: 33.33%;
+    padding: 4px 0;
+    text-transform: uppercase;
+    border: 1px solid #C6CBD4;
+    background-color: #fff;
+}
+
+.keyboardButton__number {
+    font-size: 20px;
+}
+
+.keyboardButton--backspace {
+    background: url('/deleteIcon.png') center / auto no-repeat #C6CBD4;
+}
+
+.keyboardButton--shift {
+    background: url('/capsIcon.png') center / auto no-repeat #C6CBD4;
+}
+
+.keyboardButton--textHidden > span {
+    position: absolute !important;
+    height: 1px; width: 1px; 
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);    
+}
