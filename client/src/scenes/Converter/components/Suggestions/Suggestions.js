@@ -9,8 +9,9 @@ class Suggestions extends Component {
             slideDisplayed: 1,
         }
 
-        this.handleClick = this.handleClick.bind(this)
-        this.slideSuggestions = this.slideSuggestions.bind(this)
+        this.handleClick = this.handleClick.bind(this);
+        this.handleKeydown = this.handleKeydown.bind(this);
+        this.slideSuggestions = this.slideSuggestions.bind(this);
     }
     
     componentWillReceiveProps(nextProps) {
@@ -24,6 +25,12 @@ class Suggestions extends Component {
 
     handleClick(e) {
         this.props.addWord(e.target.innerText)
+    }
+
+    handleKeydown(e) {
+        if (e.key === "Enter") {
+            this.props.addWord(e.target.innerText)
+        }
     }
 
     slideSuggestions(event) {
@@ -50,7 +57,6 @@ class Suggestions extends Component {
         const hideListItem = (i) => {
             const startSlide = (this.state.slideDisplayed - 1) * 3;
             const endSlide = startSlide + 2;
-            console.log(startSlide)
             if (this.state.slideDisplayed === 1) {
                 if (i > 2) {
                     return {display: 'none'}
@@ -90,7 +96,9 @@ class Suggestions extends Component {
                             <li 
                                 style={hideListItem(i)}
                                 key={i}
-                                onClick={(e) => this.handleClick(e)}>
+                                onClick={(e) => this.handleClick(e)}
+                                onKeyDown={(e) => this.handleKeydown(e)}
+                                tabIndex="0 ">
                                 {suggestion}
                             </li>
                         )

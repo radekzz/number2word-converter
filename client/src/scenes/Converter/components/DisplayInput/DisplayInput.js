@@ -5,9 +5,9 @@ class DisplayInput extends Component {
     render() {
         return (
             <section className="displayInput">
-                <div className="displayInput__typeBox" tabIndex="0">
+                <div className="displayInput__typeBox">
                     {/* {this.props.inputValues.numbers} */}
-                    <p>{this.props.currentMessage}{this.props.inputValues.letters}<span className="displayInput__cursor">|</span></p>
+                    <p tabIndex="0">{this.props.currentMessage}{this.props.inputValues.letters}<span className="displayInput__cursor">|</span></p>
                 </div>
                 <button 
                     className="displayInput__submit"
