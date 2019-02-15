@@ -1,0 +1,9 @@
+.appHeader > h1 {
+    margin: 0;
+    padding: 3px 0;
+    font-size: 12px;
+    text-align: center;
+    background-color: #157EFB;
+    color: white;
+    font-weight: normal;
+}

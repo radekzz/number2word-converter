@@ -3,24 +3,28 @@ import MessageItem from './components/MessageItem/MessageItem';
 import './DisplayMessages.css'
 
 class DisplayMessages extends Component {
-  render() {
-    return (
-        <div className="displayMessages">
-            DisplayMessages
-            <ol>
-                {this.props.messages.map((message, i) => {
-                    return (
-                        <li key={i}>
-                            <MessageItem 
+    render() {
+        return (
+            <div className="displayMessages">
+                <ol className="displayMessages__list">
+                    <MessageItem
+                        position="left"
+                        text="Hey there! May I help you?" />
+                    <MessageItem
+                        position="right"
+                        text="Hello, i have a question..." />
+                    {this.props.messages.map((message, i) => {
+                        return (
+                            <MessageItem
+                                key={i}
                                 position={message.position}
                                 text={message.text} />
-                        </li>
-                    )
-                })}
-            </ol>
-        </div>
-    );
-  }
+                        )
+                    })}
+                </ol>
+            </div>
+        );
+    }
 }
 
 export default DisplayMessages;

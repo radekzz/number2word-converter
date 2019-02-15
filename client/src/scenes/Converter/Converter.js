@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppHeader from '../../components/AppHeader/AppHeader';
 import DisplayMessages from './components/DisplayMessages/DisplayMessages';
 import DisplayInput from './components/DisplayInput/DisplayInput';
 import Suggestions from './components/Suggestions/Suggestions';
@@ -102,7 +103,7 @@ class Converter extends Component {
     render() {
         return (
             <section className="converter">
-                <div>header</div>
+                <AppHeader />
                 <DisplayMessages messages={this.state.messages} />
                 <DisplayInput 
                     currentMessage={this.state.currentMessage}
