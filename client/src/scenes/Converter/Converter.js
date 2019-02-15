@@ -28,7 +28,7 @@ class Converter extends Component {
 
     async fetchSuggestions(numbers) {
         try {
-            const response = await apiService.fetchFilteredT9conversions({numericString: numbers});
+            const response = await apiService.fetchFilteredT9conversions({ numericString: numbers });
             const body = await response.json();
 
             if (response.status !== 200) throw Error(body.message);
@@ -40,11 +40,11 @@ class Converter extends Component {
     }
 
     updateInputValues(newValues) {
-        this.setState({inputValues: newValues})
+        this.setState({ inputValues: newValues })
 
         newValues.numbers ?
             this.fetchSuggestions(newValues.numbers) :
-            this.setState({suggestions: []})
+            this.setState({ suggestions: [] })
     }
 
     addWord(word) {
@@ -62,12 +62,6 @@ class Converter extends Component {
         const currentMessage = this.state.currentMessage;
 
         if (currentMessage) {
-            /*
-            * If the current message is not already empty, 
-            * its last character will be an empty space. 
-            * This function deletes the empty space on the first run 
-            * and its last word on the second run.
-            */
             if (currentMessage.endsWith(' ')) {
                 this.setState(state => {
                     return {
@@ -87,17 +81,20 @@ class Converter extends Component {
     }
 
     submitMessage() {
-        const messages = this.state.messages;
-        messages.push({
-            position: 'right',
-            text: (this.state.currentMessage + this.state.inputValues.letters).trim()
-        })
-        this.setState({
-            messages,
-            currentMessage: '',
-            inputValues: { numbers: '', letters: '' },
-            suggestions: []
-        })
+        if (this.state.currentMessage != '') {
+            const messages = this.state.messages;
+            messages.push({
+                position: 'right',
+                text: (this.state.currentMessage + this.state.inputValues.letters).trim()
+            })
+
+            this.setState({
+                messages,
+                currentMessage: '',
+                inputValues: { numbers: '', letters: '' },
+                suggestions: []
+            });
+        }
     }
 
     render() {
@@ -105,14 +102,14 @@ class Converter extends Component {
             <section className="converter">
                 <AppHeader />
                 <DisplayMessages messages={this.state.messages} />
-                <DisplayInput 
+                <DisplayInput
                     currentMessage={this.state.currentMessage}
                     inputValues={this.state.inputValues}
                     submitMessage={this.submitMessage} />
-                <Suggestions 
+                <Suggestions
                     suggestions={this.state.suggestions}
                     addWord={this.addWord} />
-                <Keyboard 
+                <Keyboard
                     inputValues={this.state.inputValues}
                     addWord={this.addWord}
                     deleteWord={this.deleteWord}
