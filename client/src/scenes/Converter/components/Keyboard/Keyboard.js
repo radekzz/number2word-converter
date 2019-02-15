@@ -34,6 +34,10 @@ class Keyboard extends Component {
         document.removeEventListener("keydown", this.handleKeydown);
     }
 
+    handleKeydown(event) {       
+        this.handleButtonClick(event.key)
+    }
+
     handleEraseClick() {
         const updatedInputValues = {
             numbers: this.props.inputValues.numbers.slice(0, -1),
@@ -58,15 +62,10 @@ class Keyboard extends Component {
             this.props.addWord('')
     }
 
-    handleKeydown(event) {       
-        this.handleButtonClick(event.key)
-    }
-
     handleButtonClick(buttonKey) {
         switch (buttonKey) {
             case 'Shift':
                 // TODO: implement uppercasing
-                console.log('uppercase it');
                 break;
             case 'Backspace':
                 this.handleEraseClick();
@@ -75,7 +74,7 @@ class Keyboard extends Component {
                 this.handleSpaceClick();
                 break;
             case '1':
-                console.log('clicking number 1 does nothing at version 1.0.0, sorry');
+                // TODO: implement inserting special characters
                 break;
             case '2':
             case '3':
@@ -111,3 +110,4 @@ class Keyboard extends Component {
 }
 
 export default Keyboard;
+

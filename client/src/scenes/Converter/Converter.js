@@ -29,7 +29,9 @@ class Converter extends Component {
         try {
             const response = await apiService.fetchFilteredT9conversions({numericString: numbers});
             const body = await response.json();
+
             if (response.status !== 200) throw Error(body.message);
+
             this.setState({ suggestions: body.words })
         } catch (err) {
             console.log(err)
@@ -46,9 +48,7 @@ class Converter extends Component {
 
     addWord(word) {
         this.setState(prevState => ({
-            currentMessage: prevState.currentMessage ? 
-                prevState.currentMessage + word + ' ' :
-                word + ' ',
+            currentMessage: prevState.currentMessage + word + ' ',
             inputValues: {
                 numbers: '',
                 letters: ''
@@ -94,7 +94,8 @@ class Converter extends Component {
         this.setState({
             messages,
             currentMessage: '',
-            inputValues: { numbers: '', letters: '' }
+            inputValues: { numbers: '', letters: '' },
+            suggestions: []
         })
     }
 
@@ -110,9 +111,9 @@ class Converter extends Component {
                     suggestions={this.state.suggestions}
                     addWord={this.addWord} />
                 <Keyboard 
+                    inputValues={this.state.inputValues}
                     addWord={this.addWord}
                     deleteWord={this.deleteWord}
-                    inputValues={this.state.inputValues}
                     updateInputValues={this.updateInputValues} />
             </div>
         );
@@ -120,20 +121,3 @@ class Converter extends Component {
 }
 
 export default Converter;
-
-// test
-
-// it should render coponents
-//
-
-// updateCurrentInput, if the newvalues.numbers are currently empty,
-// empty the suggestion, otherwise trigger fetch with new values
-
-// addWord, inserting space logic, emptying suggestions and currentinput
-
-// deleteword, delete the word only if there is something to delete - current message
-// is not empty
-// deleteWord, delete an empty space if there is any in the the current mess
-// otherwise delete the last word of the current message
-
-// submitMessage, emty currentmessage and current input
